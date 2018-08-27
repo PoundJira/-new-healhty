@@ -3,9 +3,11 @@ package com.example.lab203_19.healty;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -33,6 +35,16 @@ public class MenuFragment extends Fragment{
                 );
         ListView _menulist = (ListView) getView().findViewById(R.id.menu_list);
         _menulist.setAdapter(_menuAdapter);
+        _menulist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+                Log.d("MENU", "Click on menu = "+_menu.get(i));
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_view, new BMIFragment())
+                        .commit();
+            }
+        });
     }
 
     @Nullable
